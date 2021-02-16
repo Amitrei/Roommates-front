@@ -1,0 +1,44 @@
+.menu-btn {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  background-color: #213141;
+  display: flex;
+  padding: 2rem 2.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s ease;
+  cursor: pointer;
+
+  a {
+    color: white;
+    align-self: center;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5rem;
+  }
+}
+
+.menu-btn:hover {
+  background-color: #293b4d;
+}
+.menu-btn:last-child {
+  margin-bottom: 0;
+  border-top-right-radius: 2rem;
+  width: 100%;
+  margin-top: auto;
+  background-color: rgb(179, 75, 62);
+  justify-content: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-icon-title {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.btn-icon {
+  margin-right: 1.5rem;
+  color: white;
+}

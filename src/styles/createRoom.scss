@@ -1,0 +1,44 @@
+.create-room-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+
+  input {
+    border-radius: 0.5rem;
+    outline: none;
+    border: 2px solid rgba(46, 1, 131, 0.5);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.021);
+    width: 200px;
+    height: 30px;
+    padding: 0 0.5rem;
+    font-size: 1.4rem;
+    margin: 2rem;
+  }
+}
+
+.side-title {
+  margin: 3rem 0 0;
+}
+
+.create-room-right-side,
+.create-room-left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.create-room-add-members-p {
+  font-size: 1.4rem;
+  margin: 0.5rem 0 1rem 0;
+  color: rgb(70, 70, 70);
+}
+
+.side-disabled {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.3;
+}
