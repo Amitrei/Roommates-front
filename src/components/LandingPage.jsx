@@ -3,8 +3,6 @@ import googleIcon from "../assets/google-icon.svg";
 import landingImage from "../assets/landing-image.svg";
 
 const LandingPage = () => {
-
- 
   return (
     <div className="ladingPage-body">
       <div className="navBar">

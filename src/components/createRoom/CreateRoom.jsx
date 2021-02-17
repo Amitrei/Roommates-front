@@ -1,18 +1,65 @@
 import "../../styles/createRoom.scss";
-import Button from "@material-ui/core/Button";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Badge from "../Badge";
 import Seperator from "./../Seperator";
-import { createRoom } from "./../../store/reducers/roomReducer";
+import Form from "./../inputs/Form";
+import { createRoom, inviteMember } from "./../../store/reducers/roomReducer";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { validateRoomName } from "./../inputs/validators/createRoomValidator";
+import { validateEmailField } from "./../inputs/validators/inviteMembersValidator";
 
 const CreateRoom = () => {
   const [roomName, setRoomName] = useState("");
+  const [memberEmail, setMemberEmail] = useState("");
+  const [error, setError] = useState({ createRoomForm: null, inviteMembersForm: null });
   const dispatch = useDispatch();
   const getRoom = useSelector((state) => state.entities.room.room);
 
   const handleRoomName = (event) => {
+    const { error } = validateRoomName(event.target.value);
+    const updatedError = { ...error };
+    if (error) {
+      updatedError.createRoomForm = error.details[0].message;
+      setError(updatedError);
+    } else {
+      updatedError.createRoomForm = null;
+      setError(updatedError);
+    }
+
     setRoomName(event.target.value);
+  };
+
+  const handleInviteMember = (event) => {
+    const { error } = validateEmailField(event.target.value);
+    const updatedError = { ...error };
+    if (error) {
+      updatedError.inviteMembersForm = error.details[0].message;
+      setError(updatedError);
+    } else {
+      updatedError.inviteMembersForm = null;
+      setError(updatedError);
+    }
+    setMemberEmail(event.target.value);
+  };
+
+  const formsFields = {
+    createRoomForm: [
+      {
+        value: roomName,
+        onChange: handleRoomName,
+        label: "Room name",
+        error: error.createRoomForm,
+      },
+    ],
+    inviteMembersForm: [
+      {
+        value: memberEmail,
+        onChange: handleInviteMember,
+        label: "user email address",
+        error: error.inviteMembersForm,
+      },
+    ],
   };
 
   return (
@@ -23,16 +70,11 @@ const CreateRoom = () => {
         }>
         <Badge number={1} />
         <h2 className="side-title">Enter your room name</h2>
-        <input type="text" value={roomName} onChange={handleRoomName}></input>
-        <Button
-          variant="contained"
-          color="primary"
-          className="create-room-btn"
-          size="large"
-          onClick={() => dispatch(createRoom({ name: roomName }))}
-          style={{ fontSize: "1.2rem" }}>
-          Submit
-        </Button>
+        <Form
+          fieldsArray={formsFields["createRoomForm"]}
+          error={error.createRoomForm ? true : false}
+          onSubmit={() => dispatch(createRoom({ name: roomName }))}
+        />
       </div>
 
       <Seperator />
@@ -45,20 +87,21 @@ const CreateRoom = () => {
         }>
         <Badge number={2} />
 
-        <h2 className="side-title">Invite your roommates to the room</h2>
-        <p className="create-room-add-members-p">Enter a valid user email</p>
-        <input type="text"></input>
-        <Button
-          variant="contained"
-          color="primary"
-          className="create-room-btn"
-          size="large"
-          style={{ fontSize: "1.2rem" }}
-          onClick={() => {
-            console.log(getRoom);
-          }}>
-          Submit
-        </Button>
+        <h2 className="side-title">Invite your roommates</h2>
+        <Form
+          fieldsArray={formsFields["inviteMembersForm"]}
+          error={error.inviteMembersForm ? true : false}
+          onSubmit={() => dispatch(inviteMember(memberEmail))}
+        />
+      </div>
+
+      <div
+        className={
+          getRoom && getRoom.name
+            ? "go-to-dashboard-container"
+            : "go-to-dashboard-container side-disabled"
+        }>
+        <NavigateNextIcon className="next-icon" />
       </div>
     </div>
   );

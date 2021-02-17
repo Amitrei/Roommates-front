@@ -1,0 +1,47 @@
+.custom-input-container {
+  width: 200px;
+}
+
+.custom-label-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  .custom-label {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    color: rgb(109, 109, 109);
+  }
+}
+.custom-text-input {
+  border-radius: 0.5rem;
+  outline: none;
+  border: 2px solid rgba(46, 1, 131, 0.5);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.021);
+  width: 200px;
+  height: 30px;
+  padding: 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.error-message {
+  width: 200px;
+  margin-top: 1rem;
+  color: rgb(211, 56, 56);
+  font-weight: 600;
+  font-size: 1.2rem;
+  animation: errorFadeIn 0.3s ease-in-out;
+  text-align: center;
+}
+
+@keyframes errorFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

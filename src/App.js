@@ -15,8 +15,8 @@ function App() {
 
   return (
     <div className="app">
-      {!user && <LandingPage />}
-      {user && <MainApp user={user} />}
+      {user && !user.email && <LandingPage />}
+      {user && user.email && <MainApp user={user} />}
     </div>
   );
 }
