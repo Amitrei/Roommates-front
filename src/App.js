@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import LandingPage from "./components/LandingPage";
+import { ToastContainer } from "react-toastify";
+
 import "./styles/app.scss";
 import { getUser } from "./store/reducers/authReducer";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,8 +17,8 @@ function App() {
 
   return (
     <div className="app">
-      {user && !user.email && <LandingPage />}
-      {user && user.email && <MainApp user={user} />}
+      {user && user.email ? <MainApp user={user} /> : <LandingPage />}
+      <ToastContainer />
     </div>
   );
 }

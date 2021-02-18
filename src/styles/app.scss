@@ -11,6 +11,11 @@ html {
   padding: 0;
 }
 
+a {
+  outline: none;
+  text-decoration: none;
+}
+
 body {
   background: rgb(222, 227, 221);
   font-size: 1.6rem;

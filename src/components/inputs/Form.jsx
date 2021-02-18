@@ -2,7 +2,7 @@ import TextInput from "./TextInput";
 import Button from "@material-ui/core/Button";
 import "../../styles/form.scss";
 
-const Form = ({ fieldsArray, onSubmit, error }) => {
+const Form = ({ fieldsArray = [], onSubmit, error }) => {
   return (
     <form className="custom-form">
       {fieldsArray.map((field) => (
