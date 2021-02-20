@@ -4,5 +4,5 @@ import transactionsReducer from "./transactionsReducer";
 
 export default combineReducers({
   room: roomReducer,
-  // transactions: transactionsReducer,
+  transactions: transactionsReducer,
 });

@@ -3,43 +3,29 @@ import { apiCallBegan } from "../constants/api";
 
 const slice = createSlice({
   name: "transactions",
-  initialState: {},
+  initialState: { createTransaction: {} },
   reducers: {
-    roomTransactionsRecieved: (state, action) => {
-      state.roomTransactions = action.payload;
+    categoriesRecieved: (state, action) => {
+      state.categories = action.payload;
     },
 
-    transactionCreated: (state, action) => {
-      state.roomTransactions.push(action.payload);
+    createdCategoryRecieved: (state, action) => {
+      state.createTransaction.category = action.payload;
     },
   },
 });
 
-export const { roomTransactionsRecieved, transactionCreated } = slice.actions;
+export const { categoriesRecieved, createdCategoryRecieved } = slice.actions;
 
 // Action Creators
-
-export const getRoomTransactions = () => (dispatch, getState) => {
+export const loadCategories = () => (dispatch, getState) => {
   return dispatch(
     apiCallBegan({
-      url: `${process.env.REACT_APP_API_MAIN_URL}/api/transactions/room/${
-        getState().auth.user.roomId
-      }`,
+      url: `${process.env.REACT_APP_API_MAIN_URL}/api/categories`,
       method: "get",
-      onSuccess: roomTransactionsRecieved.type,
+      onSuccess: categoriesRecieved.type,
     })
   );
 };
 
-export const createTransaction = (transaction) => (dispatch, getState) => {
-  return dispatch(
-    apiCallBegan({
-      url: `${process.env.REACT_APP_API_MAIN_URL}/api/transactions/${getState().auth.user.roomId}`,
-      method: "post",
-      data: transaction,
-      onSuccess: transactionCreated.type,
-      toastMessage: "transaction submitted",
-    })
-  );
-};
 export default slice.reducer;

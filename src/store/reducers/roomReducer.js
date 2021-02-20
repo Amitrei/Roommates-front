@@ -3,7 +3,7 @@ import { apiCallBegan } from "./../constants/api";
 
 const slice = createSlice({
   name: "room",
-  initialState: { room: null },
+  initialState: { room: null, roomTransactions: [] },
   reducers: {
     roomRecieved: (state, action) => {
       state.room = action.payload;

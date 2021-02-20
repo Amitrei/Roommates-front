@@ -1,0 +1,39 @@
+.categories-grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+}
+
+.category-btn {
+  background-color: rgb(221, 239, 241);
+  // border: 2px solid rgb(235, 235, 235);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color, box-shadow 0.2s ease-in-out;
+
+  img {
+    object-fit: contain;
+    width: 50px;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+}
+
+.category-btn:hover {
+  background-color: rgb(240, 240, 240);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2), 0 -3px 5px rgba(0, 0, 0, 0.04);
+}
+
+.clicked-category-btn {
+  border: 2px solid blue;
+}
