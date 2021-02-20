@@ -1,5 +1,33 @@
 .main-transactions-container {
+  height: 100%;
+  padding: 0 10rem;
+  width: 100%;
+  display: grid;
+  row-gap: 4rem;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "total-expenses total-expenses transaction-log transaction-log "
+    "expenses-by-users expenses-by-users expenses-by-users expenses-by-users";
+}
+
+.transaction-log-grid {
   display: flex;
   justify-content: center;
   align-items: center;
+  grid-area: transaction-log;
+}
+
+.transaction-total-exp-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: total-expenses;
+}
+
+.transaction-by-users-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: expenses-by-users;
 }

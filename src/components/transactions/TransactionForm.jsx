@@ -2,7 +2,7 @@ import { useState } from "react";
 import Form from "./../inputs/Form";
 import { createTransaction } from "../../store/reducers/roomReducer";
 import { useDispatch, useSelector } from "react-redux";
-
+import "../../styles/transactionForm.scss";
 const TransactionForm = () => {
   const dispatch = useDispatch();
   const [amount, setAmount] = useState("");
@@ -24,7 +24,7 @@ const TransactionForm = () => {
   ];
 
   return (
-    <div>
+    <div className={isCategoryPicked ? "transaction-form" : "disable-transaction-form"}>
       <Form
         error={!isCategoryPicked}
         fieldsArray={formFields}

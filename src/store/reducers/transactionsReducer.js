@@ -3,8 +3,16 @@ import { apiCallBegan } from "../constants/api";
 
 const slice = createSlice({
   name: "transactions",
-  initialState: { createTransaction: {} },
+  initialState: { createTransaction: { render: false } },
   reducers: {
+    renderedCreateTransaction: (state, action) => {
+      state.createTransaction.render = true;
+    },
+
+    unrenderedCreateTransaction: (state, action) => {
+      state.createTransaction.render = false;
+    },
+
     categoriesRecieved: (state, action) => {
       state.categories = action.payload;
     },
@@ -15,7 +23,12 @@ const slice = createSlice({
   },
 });
 
-export const { categoriesRecieved, createdCategoryRecieved } = slice.actions;
+export const {
+  categoriesRecieved,
+  createdCategoryRecieved,
+  renderedCreateTransaction,
+  unrenderedCreateTransaction,
+} = slice.actions;
 
 // Action Creators
 export const loadCategories = () => (dispatch, getState) => {

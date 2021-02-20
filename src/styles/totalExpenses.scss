@@ -1,0 +1,31 @@
+.total-expenses-container {
+  background-color: white;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 2rem;
+  padding: 2rem;
+  width: fit-content;
+
+  h3 {
+    font-size: 1.6rem;
+  }
+}
+
+.total-expenses-amount {
+  color: white;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 600;
+  background-color: #ff8a8a;
+  padding: 1rem 3rem;
+  font-size: 2rem;
+  border-radius: 1rem;
+}
+
+.total-expenses-flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.total-expenses-left-side {
+  padding: 2rem 4rem;
+}

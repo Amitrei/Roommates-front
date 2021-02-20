@@ -2,7 +2,6 @@ import FirstLogin from "./firstTime/FirstLogin";
 import SideMenu from "./sideMenu/SideMenu";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/mainApp.scss";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import Dashboard from "./Dashboard";
 const MainApp = ({ user }) => {

@@ -6,6 +6,7 @@
 }
 
 .category-btn {
+  user-select: none;
   background-color: rgb(221, 239, 241);
   // border: 2px solid rgb(235, 235, 235);
   border-radius: 1rem;
@@ -35,5 +36,5 @@
 }
 
 .clicked-category-btn {
-  border: 2px solid blue;
+  border: 2px solid rgb(151, 151, 253);
 }

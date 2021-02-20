@@ -1,0 +1,10 @@
+.disable-transaction-form {
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.transaction-form {
+  opacity: 1;
+  transition: all 0.4s ease-in-out;
+}

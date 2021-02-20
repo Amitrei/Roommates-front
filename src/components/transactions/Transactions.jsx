@@ -1,17 +1,43 @@
-import { useDispatch, useSelector } from "react-redux";
-import CategoriesMenu from "./CategoriesMenu";
-import CreateTransaction from "./CreateTransaction";
 import TransactionsLog from "./TransactionsLog";
+import TotalExpenses from "./TotalExpenses";
+import BarChart from "./charts/BarChart";
+import { useDispatch, useSelector } from "react-redux";
+import CreateTransaction from "./CreateTransaction";
+import {
+  renderedCreateTransaction,
+  unrenderedCreateTransaction,
+} from "../../store/reducers/transactionsReducer";
 import "../../styles/transactions.scss";
+
 const Transactions = () => {
   const room = useSelector((state) => state.entities.room.room);
+  const dispatch = useDispatch();
+  const isCreateTransaction = useSelector(
+    (state) => state.entities.transactions.createTransaction.render
+  );
 
+  const handleCreateTransactionClick = () => {
+    dispatch(renderedCreateTransaction());
+  };
   return (
-    <div className="main-transactions-container">
-      <CreateTransaction />
-      {/* <h1>{room && room.totalExpenses}</h1> */}
-      {/* <TransactionsLog /> */}
-    </div>
+    <>
+      <div>
+        <button onClick={handleCreateTransactionClick}>create transaction</button>
+      </div>
+      <div className="main-transactions-container">
+        {isCreateTransaction && <CreateTransaction />}
+
+        <div className="transaction-log-grid">
+          <TransactionsLog />
+        </div>
+        <div className="transaction-total-exp-grid">
+          <TotalExpenses />
+        </div>
+        <div className="transaction-by-users-grid">
+          <BarChart />
+        </div>
+      </div>
+    </>
   );
 };
 
