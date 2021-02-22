@@ -2,26 +2,30 @@
   position: relative;
   padding: 2rem;
   min-height: 100vh;
-}
 
-.dashboard-room-name {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.137);
-  border-radius: 0.5rem;
-  padding: 1rem 2rem;
-  border: 1px solid rgba(128, 128, 128, 0.05);
-  box-shadow: 0 5px 8px -5px rgba(0, 0, 0, 0.1);
-  width: fit-content;
-  color: #202f3e;
-
-  h1 {
-    font-size: 1.5rem;
+  .dashboard-title {
+    margin: 1rem 5rem;
+    font-size: 2.8rem;
+    animation: dashboardTitleIn 1s ease-in-out forwards;
   }
 }
 
-.dashboard-house-icon {
-  font-size: 2.5rem !important;
-  margin-right: 1rem !important;
+@keyframes dashboardTitleIn {
+  from {
+    opacity: 0;
+    transform: translate(-1%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+.dashboard-title-date {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0.3rem 0 0 0;
+  color: rgba(175, 175, 175, 0.76);
 }

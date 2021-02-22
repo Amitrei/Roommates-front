@@ -1,0 +1,22 @@
+.dashboard-menu-btn {
+  img {
+    position: relative;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  img:hover {
+    opacity: 0.8;
+  }
+}
+
+.dashboard-btn-description {
+  margin-left: 0.8rem;
+  width: 50px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgba(80, 80, 80, 0.541);
+  user-select: none;
+  cursor: pointer;
+  margin-right: 2rem;
+}

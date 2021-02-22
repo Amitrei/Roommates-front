@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="33" viewBox="0 0 38 33">
+  <g id="deleteTransaction" transform="translate(-32.921 -5.817)">
+    <g id="Group_7" data-name="Group 7" transform="translate(32.921 5.956)">
+      <rect id="Rectangle_23" data-name="Rectangle 23" width="38" height="33" rx="10" transform="translate(0 -0.139)" fill="#ff4560"/>
+      <path id="iconmonstr-shopping-cart-17" d="M11.9,8.493l.027-.549a7.176,7.176,0,0,0-.2-1.648h6.5l-.611,2.2ZM9.216,19.48a1.648,1.648,0,1,0,1.626,1.648A1.638,1.638,0,0,0,9.216,19.48ZM21.472,3,17.751,16.184H6.445l-.493-1.19a7.052,7.052,0,0,1-1.073.091,6.947,6.947,0,0,1-1.291-.125L5,18.381H19.357L23.123,5.2h2.091L26.02,3ZM14.636,19.48a1.648,1.648,0,1,0,1.626,1.648A1.637,1.637,0,0,0,14.636,19.48ZM9.758,7.944a4.914,4.914,0,0,1-4.879,4.944A4.944,4.944,0,0,1,4.879,3,4.914,4.914,0,0,1,9.758,7.944ZM7.589,7.395H2.168v1.1H7.589Z" transform="translate(6.941 3.756)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

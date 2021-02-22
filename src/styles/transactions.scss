@@ -1,13 +1,16 @@
 .main-transactions-container {
   height: 100%;
-  padding: 0 10rem;
+  padding: 2rem 5rem;
   width: 100%;
   display: grid;
-  row-gap: 4rem;
-  grid-template-columns: auto auto auto auto;
-  grid-template-rows: auto;
+  gap: 2rem;
+  // grid-template-columns: auto auto auto auto;
+  // grid-template-rows: auto;
+  // grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas:
-    "total-expenses total-expenses transaction-log transaction-log "
+    "dashboard-menu dashboard-menu dashboard-menu transaction-log "
+    "total-expenses total-expenses total-expenses transaction-log"
     "expenses-by-users expenses-by-users expenses-by-users expenses-by-users";
 }
 
@@ -15,6 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   grid-area: transaction-log;
 }
 
@@ -22,6 +26,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   grid-area: total-expenses;
 }
 
@@ -29,5 +34,49 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   grid-area: expenses-by-users;
+}
+
+.dashboard-top-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 2rem;
+  padding: 2rem 0rem;
+  border: 1px solid rgba(128, 128, 128, 0.05);
+  box-shadow: 0 5px 15px 5px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  color: black;
+  grid-area: dashboard-menu;
+  h1 {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.dashboard-house-icon {
+  font-size: 2.5rem !important;
+  margin-right: 1rem !important;
+}
+
+.room-name-container {
+  flex: 1;
+  display: flex;
+  padding: 0 2rem;
+  justify-content: flex-start !important;
+}
+
+.dashboard-menu-btns-container {
+  display: flex;
+  justify-content: space-between !important;
+  padding: 0 3rem;
+  flex: 2;
 }

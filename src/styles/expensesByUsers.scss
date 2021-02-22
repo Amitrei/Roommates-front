@@ -3,9 +3,18 @@
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
   border-radius: 2rem;
   padding: 2rem;
-  width: fit-content;
-
+  width: 100%;
+  opacity: 0;
+  transform: translate(2%, 0);
+  animation: expensesByUserIn 1s 0.05s ease-in-out forwards;
   h3 {
     font-size: 1.6rem;
+  }
+}
+
+@keyframes expensesByUserIn {
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
   }
 }

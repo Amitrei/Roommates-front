@@ -3,11 +3,18 @@ import TotalExpenses from "./TotalExpenses";
 import BarChart from "./charts/BarChart";
 import { useDispatch, useSelector } from "react-redux";
 import CreateTransaction from "./CreateTransaction";
+import HouseIcon from "@material-ui/icons/House";
+import addMember from "../../assets/addMember.svg";
+import removeMember from "../../assets/removeMember.svg";
+import addTransaction from "../../assets/addTransaction.svg";
+import deleteTransaction from "../../assets/deleteTransaction.svg";
 import {
-  renderedCreateTransaction,
-  unrenderedCreateTransaction,
+  renderCreateTransaction,
+  renderDeleteTransaction
 } from "../../store/reducers/transactionsReducer";
 import "../../styles/transactions.scss";
+import DashboardMenuBtn from "./../DashboardMenuBtn";
+import DeleteTransaction from "./DeleteTransaction";
 
 const Transactions = () => {
   const room = useSelector((state) => state.entities.room.room);
@@ -15,17 +22,41 @@ const Transactions = () => {
   const isCreateTransaction = useSelector(
     (state) => state.entities.transactions.createTransaction.render
   );
+  const isDeleteTransaction = useSelector(
+    (state) => state.entities.transactions.deleteTransaction.render
+  );
 
   const handleCreateTransactionClick = () => {
-    dispatch(renderedCreateTransaction());
+    dispatch(renderCreateTransaction());
   };
+
+  const handleDeleteTransactionClick = () => {
+    dispatch(renderDeleteTransaction());
+  };
+
   return (
     <>
-      <div>
-        <button onClick={handleCreateTransactionClick}>create transaction</button>
-      </div>
+      {isCreateTransaction && <CreateTransaction />}
+      {isDeleteTransaction && <DeleteTransaction />}
+      <div>{/* <button onClick={handleCreateTransactionClick}>create transaction</button> */}</div>
+
       <div className="main-transactions-container">
-        {isCreateTransaction && <CreateTransaction />}
+        <div className="dashboard-top-menu">
+          <div className="room-name-container">
+            <HouseIcon className="dashboard-house-icon" />
+            <h1>{room && room.name}</h1>
+          </div>
+          <div className="dashboard-menu-btns-container">
+            <DashboardMenuBtn icon={addMember} content="Add Member" />
+            <DashboardMenuBtn icon={removeMember} content="Remove Member" />
+            <DashboardMenuBtn
+              icon={addTransaction}
+              content="add Transaction"
+              onClick={handleCreateTransactionClick}
+            />
+            <DashboardMenuBtn icon={deleteTransaction} content="delete Transaction" onClick={handleDeleteTransactionClick} />
+          </div>
+        </div>
 
         <div className="transaction-log-grid">
           <TransactionsLog />

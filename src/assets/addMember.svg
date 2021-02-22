@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="33" viewBox="0 0 38 33">
+  <g id="addMember" transform="translate(0 3.89)">
+    <g id="Group_7" data-name="Group 7" transform="translate(0 -3.687)">
+      <rect id="Rectangle_23" data-name="Rectangle 23" width="38" height="33" rx="10" transform="translate(0 -0.203)" fill="#43cf5f"/>
+    </g>
+    <path id="iconmonstr-user-8" d="M16.378,12.6a3.779,3.779,0,1,0,3.779,3.779A3.781,3.781,0,0,0,16.378,12.6Zm2.1,4.2H16.8v1.68h-.84V16.8h-1.68v-.84h1.68v-1.68h.84v1.68h1.68Zm-6.03,3.36H0l0-1.042C0,17,.167,15.776,2.669,15.2c2.826-.653,5.617-1.237,4.275-3.711C2.969,4.157,5.81,0,10.079,0c5.67,0,6.3,6.379,3.057,11.489-1.085,1.706-2.217,3.049-2.217,4.889A5.437,5.437,0,0,0,12.447,20.157Z" transform="translate(8.921 1.031)" fill="#fff"/>
+  </g>
+</svg>

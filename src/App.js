@@ -10,9 +10,7 @@ import MainApp from "./components/MainApp";
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth["user"]);
-  const isCreateTransaction = useSelector(
-    (state) => state.entities.transactions.createTransaction.render
-  );
+  const isBlackOverlay = useSelector((state) => state.globals.renderBlackOverlay);
   useEffect(() => {
     dispatch(getUser());
   }, []);
@@ -21,7 +19,7 @@ function App() {
     <div className="app">
       <div
         className={
-          isCreateTransaction ? "black-overlay black-overlay-in" : "black-overlay black-overlay-out"
+          isBlackOverlay ? "black-overlay black-overlay-in" : "black-overlay black-overlay-out"
         }></div>
       {user && user.email ? <MainApp user={user} /> : <LandingPage />}
       <ToastContainer />

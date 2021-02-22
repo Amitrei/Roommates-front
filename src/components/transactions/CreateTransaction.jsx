@@ -1,7 +1,7 @@
 import CategoriesMenu from "./CategoriesMenu";
 import TransactionForm from "./TransactionForm";
 import "../../styles/createTransaction.scss";
-import { unrenderedCreateTransaction } from "../../store/reducers/transactionsReducer";
+import { unRenderCreateTransaction } from "../../store/reducers/transactionsReducer";
 import { useDispatch, useSelector } from "react-redux";
 const CreateTransaction = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const CreateTransaction = () => {
     <div className="create-transaction-container">
       <span
         className="create-transaction-close-btn"
-        onClick={() => dispatch(unrenderedCreateTransaction())}>
+        onClick={() => dispatch(unRenderCreateTransaction())}>
         X
       </span>
       <h1>Submit transaction</h1>

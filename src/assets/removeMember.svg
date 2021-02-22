@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="33" viewBox="0 0 38 33">
+  <g id="removeMember" transform="translate(0 0.203)">
+    <rect id="Rectangle_23" data-name="Rectangle 23" width="38" height="33" rx="10" transform="translate(0 -0.203)" fill="#ff4560"/>
+    <path id="iconmonstr-user-11_1_" data-name="iconmonstr-user-11 (1)" d="M16.25,12.5A3.75,3.75,0,1,0,20,16.25,3.751,3.751,0,0,0,16.25,12.5Zm2.083,4.167H14.167v-.833h4.167ZM12.35,20H0l0-1.034c0-2.1.166-3.312,2.648-3.886,2.8-.648,5.573-1.227,4.242-3.682C2.946,4.124,5.765,0,10,0c5.626,0,6.255,6.329,3.033,11.4-1.077,1.693-2.2,3.025-2.2,4.851A5.4,5.4,0,0,0,12.35,20Z" transform="translate(9 4.797)" fill="#fff"/>
+  </g>
+</svg>

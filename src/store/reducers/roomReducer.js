@@ -23,6 +23,13 @@ const slice = createSlice({
       state.roomTransactions.push(action.payload);
     },
 
+    transactionDeleted: (state, action) => {
+      const index = state.room.transactions.findIndex((t) => t._id === action.payload._id);
+      state.room.totalExpenses -= action.payload.amount;
+      state.room.transactions.splice(index, 1);
+      state.roomTransactions.splice(index, 1);
+    },
+
     transactionsRecieved: (state, action) => {
       state.roomTransactions = action.payload;
     },
@@ -35,6 +42,7 @@ export const {
   roomRecieved,
   transactionCreated,
   transactionsRecieved,
+  transactionDeleted,
 } = slice.actions;
 export default slice.reducer;
 
@@ -98,6 +106,19 @@ export const getRoomTransactions = () => (dispatch, getState) => {
       }`,
       method: "get",
       onSuccess: transactionsRecieved.type,
+    })
+  );
+};
+
+export const deleteTranscation = (transactionId) => (dispatch, getState) => {
+  return dispatch(
+    apiCallBegan({
+      url: `${process.env.REACT_APP_API_MAIN_URL}/api/transactions/${
+        getState().auth.user.roomId
+      }/${transactionId}`,
+      method: "delete",
+      onSuccess: transactionDeleted.type,
+      toastMessage: "Transaction deleted successfuly",
     })
   );
 };
