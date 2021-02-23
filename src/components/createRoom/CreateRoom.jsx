@@ -7,12 +7,11 @@ import { createRoom, inviteMember } from "./../../store/reducers/roomReducer";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { validateRoomName } from "./../inputs/validators/createRoomValidator";
-import { validateEmailField } from "./../inputs/validators/inviteMembersValidator";
+import InviteMember from "./InviteMember";
 
 const CreateRoom = () => {
   const [roomName, setRoomName] = useState("");
-  const [memberEmail, setMemberEmail] = useState("");
-  const [error, setError] = useState({ createRoomForm: null, inviteMembersForm: null });
+  const [error, setError] = useState({ createRoomForm: null });
   const dispatch = useDispatch();
   const getRoom = useSelector((state) => state.entities.room.room);
 
@@ -30,19 +29,6 @@ const CreateRoom = () => {
     setRoomName(event.target.value);
   };
 
-  const handleInviteMember = (event) => {
-    const { error } = validateEmailField(event.target.value);
-    const updatedError = { ...error };
-    if (error) {
-      updatedError.inviteMembersForm = error.details[0].message;
-      setError(updatedError);
-    } else {
-      updatedError.inviteMembersForm = null;
-      setError(updatedError);
-    }
-    setMemberEmail(event.target.value);
-  };
-
   const formsFields = {
     createRoomForm: [
       {
@@ -50,14 +36,6 @@ const CreateRoom = () => {
         onChange: handleRoomName,
         label: "Room name",
         error: error.createRoomForm,
-      },
-    ],
-    inviteMembersForm: [
-      {
-        value: memberEmail,
-        onChange: handleInviteMember,
-        label: "user email address",
-        error: error.inviteMembersForm,
       },
     ],
   };
@@ -88,11 +66,7 @@ const CreateRoom = () => {
         <Badge number={2} />
 
         <h2 className="side-title">Invite your roommates</h2>
-        <Form
-          fieldsArray={formsFields["inviteMembersForm"]}
-          error={error.inviteMembersForm ? true : false}
-          onSubmit={() => dispatch(inviteMember(memberEmail))}
-        />
+        <InviteMember />
       </div>
 
       <div

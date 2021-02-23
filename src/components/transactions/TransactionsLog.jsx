@@ -14,19 +14,34 @@ const TransactionsLog = ({ isDeleteTransactions }) => {
 
   const trimLog = (amountOfTransactions) => {
     const length = roomTransactions.length;
-  
-    return length >= 5 ? roomTransactions.slice(length - amountOfTransactions, length) : roomTransactions;
+
+    return length >= 5
+      ? roomTransactions.slice(length - amountOfTransactions, length)
+      : roomTransactions;
   };
 
   const getAllUserTransactions = () => {
     return roomTransactions.filter((t) => t.madeByEmail === currentUserEmail);
   };
 
+  const handleDeleteTransaction = (transactionId) => {
+    return dispatch(deleteTranscation(transactionId));
+  };
+
   return !isDeleteTransactions ? (
     <div
       className={
-        roomTransactions?.length ? "transactions-log-container" : "transactions-empty-log-container"
+        roomTransactions?.length
+          ? "transactions-log-container"
+          : "transactions-log-container transactions-empty-log-container"
       }>
+      {!roomTransactions.length && (
+        <div className="empty-delete-transactions">
+          <img src={"https://img.icons8.com/wired/128/000000/empty-box.png"} />
+          <h4 style={{ fontSize: "1.4rem", color: "grey" }}>You have no transactions</h4>
+        </div>
+      )}
+
       {roomTransactions &&
         trimLog(5).map((transaction) => (
           <div key={transaction._id} className="transaction-row">
@@ -53,10 +68,13 @@ const TransactionsLog = ({ isDeleteTransactions }) => {
       {roomTransactions &&
         getAllUserTransactions().map((transaction) => (
           <div key={transaction._id} className="transaction-row">
+            {console.log("div", transaction._id)}
             <div
               className="delete-transaction-mark"
               onClick={() => {
-                dispatch(deleteTranscation(transaction._id));
+                console.log(transaction._id);
+                handleDeleteTransaction(transaction._id);
+                dispatch(getRoomTransactions());
               }}>
               X
             </div>
@@ -77,9 +95,9 @@ const TransactionsLog = ({ isDeleteTransactions }) => {
         ))}
       {!getAllUserTransactions().length && (
         <div className="empty-delete-transactions">
-        <img src={"https://img.icons8.com/wired/128/000000/empty-box.png"} />
-        <h4 style={{ fontSize: "1.4rem", color: "grey" }}>You have no transactions</h4>
-      </div>
+          <img src={"https://img.icons8.com/wired/128/000000/empty-box.png"} />
+          <h4 style={{ fontSize: "1.4rem", color: "grey" }}>You have no transactions</h4>
+        </div>
       )}
     </div>
   );

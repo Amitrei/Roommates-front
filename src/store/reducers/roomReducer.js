@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./../constants/api";
-
+import { renderBlackOverlay, unRenderBlackOverlay } from "./globalsReducer";
 const slice = createSlice({
   name: "room",
-  initialState: { room: null, roomTransactions: [] },
+  initialState: { room: null, roomTransactions: [], inviteMemberWindow: false },
   reducers: {
     roomRecieved: (state, action) => {
       state.room = action.payload;
@@ -14,12 +14,12 @@ const slice = createSlice({
     },
 
     memberInvited: (state, action) => {
-      state.room = action.payload;
+      state.room.invitedMembers.push(action.payload);
     },
 
     transactionCreated: (state, action) => {
       state.room.totalExpenses += action.payload.amount;
-      state.room.transactions.push(action.payload);
+      state.room.transactions.push(action.payload._id);
       state.roomTransactions.push(action.payload);
     },
 
@@ -33,6 +33,14 @@ const slice = createSlice({
     transactionsRecieved: (state, action) => {
       state.roomTransactions = action.payload;
     },
+
+    openedMemberInviteWindow: (state, action) => {
+      state.inviteMemberWindow = true;
+    },
+
+    closedMemberInviteWindows: (state, action) => {
+      state.inviteMemberWindow = false;
+    },
   },
 });
 
@@ -43,6 +51,8 @@ export const {
   transactionCreated,
   transactionsRecieved,
   transactionDeleted,
+  openedMemberInviteWindow,
+  closedMemberInviteWindows,
 } = slice.actions;
 export default slice.reducer;
 
@@ -66,7 +76,7 @@ export const inviteMember = (memberEmail) => (dispatch, getState) => {
     apiCallBegan({
       url: `${process.env.REACT_APP_API_MAIN_URL}/api/rooms/${
         getState().entities.room.room._id
-      }/members/${memberEmail}`,
+      }/invite/${memberEmail}`,
       method: "post",
       data: {},
       onSuccess: memberInvited.type,
@@ -111,6 +121,7 @@ export const getRoomTransactions = () => (dispatch, getState) => {
 };
 
 export const deleteTranscation = (transactionId) => (dispatch, getState) => {
+  console.log("inside delete", transactionId);
   return dispatch(
     apiCallBegan({
       url: `${process.env.REACT_APP_API_MAIN_URL}/api/transactions/${
@@ -121,4 +132,14 @@ export const deleteTranscation = (transactionId) => (dispatch, getState) => {
       toastMessage: "Transaction deleted successfuly",
     })
   );
+};
+
+export const openInviteMemberWindow = () => (dispatch, getState) => {
+  dispatch(renderBlackOverlay());
+  return dispatch(openedMemberInviteWindow());
+};
+
+export const closeInviteMemberWindow = () => (dispatch, getState) => {
+  dispatch(unRenderBlackOverlay());
+  return dispatch(closedMemberInviteWindows());
 };

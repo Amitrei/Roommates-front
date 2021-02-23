@@ -1,0 +1,54 @@
+.notification-container {
+  position: absolute;
+  right: 60px;
+  top: 20px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notification-icon {
+  color: rgb(22, 18, 41);
+  font-size: 20px !important;
+}
+
+.active-notification {
+  box-shadow: 0 5px 10px rgba(218, 70, 70, 0.3);
+}
+
+@keyframes activeNotifcation {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(0, -10%);
+  }
+}
+
+.red-notify-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transition: opacity ease-in-out;
+  animation: redDotFadeIn 0.5s ease-in-out forwards;
+  background-color: rgb(241, 110, 110);
+}
+
+@keyframes redDotFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

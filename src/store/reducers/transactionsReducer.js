@@ -28,6 +28,10 @@ const slice = createSlice({
     createdCategoryRecieved: (state, action) => {
       state.createTransaction.category = action.payload;
     },
+
+    clearedCreateTransactionCategory: (state, action) => {
+      state.createTransaction.category = null;
+    },
   },
 });
 
@@ -38,6 +42,7 @@ export const {
   unrenderedCreateTransaction,
   renderedDeleteTransaction,
   unrenderedDeleteTransaction,
+  clearedCreateTransactionCategory,
 } = slice.actions;
 
 // Action Creators
@@ -58,6 +63,7 @@ export const renderCreateTransaction = () => (dispatch, getState) => {
 };
 
 export const unRenderCreateTransaction = () => (dispatch, getState) => {
+  dispatch(clearedCreateTransactionCategory({}));
   dispatch(unRenderBlackOverlay({}));
   return dispatch(unrenderedCreateTransaction({}));
 };

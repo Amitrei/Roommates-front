@@ -1,0 +1,37 @@
+.invite-member-container {
+  animation: inviteMemberFadeIn 0.4s ease-in-out forwards;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: white;
+  border-radius: 1rem;
+  padding: 4rem;
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.1), 0 -10px 5px -8px rgba(0, 0, 0, 0.02);
+  z-index: 99;
+}
+
+@keyframes inviteMemberFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.invite-member-close-btn {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
