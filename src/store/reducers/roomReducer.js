@@ -1,11 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./../constants/api";
 import { renderBlackOverlay, unRenderBlackOverlay } from "./globalsReducer";
+import { deleteNotification } from "./authReducer";
 const slice = createSlice({
   name: "room",
   initialState: { room: null, roomTransactions: [], inviteMemberWindow: false },
   reducers: {
     roomRecieved: (state, action) => {
+      state.room = action.payload;
+    },
+
+    joinedRoom: (state, action) => {
       state.room = action.payload;
     },
 
@@ -53,6 +58,7 @@ export const {
   transactionDeleted,
   openedMemberInviteWindow,
   closedMemberInviteWindows,
+  joinedRoom,
 } = slice.actions;
 export default slice.reducer;
 
@@ -130,6 +136,20 @@ export const deleteTranscation = (transactionId) => (dispatch, getState) => {
       method: "delete",
       onSuccess: transactionDeleted.type,
       toastMessage: "Transaction deleted successfuly",
+    })
+  );
+};
+
+export const joinRoom = (roomId, notificationId) => (dispatch, getState) => {
+  dispatch(deleteNotification(notificationId));
+  return dispatch(
+    apiCallBegan({
+      url: `${process.env.REACT_APP_API_MAIN_URL}/api/rooms/${roomId}/members/${
+        getState().auth.user.email
+      }`,
+      method: "post",
+      onSuccess: joinedRoom.type,
+      toastMessage: "You joined the room",
     })
   );
 };

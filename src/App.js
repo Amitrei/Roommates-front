@@ -27,9 +27,7 @@ function App() {
     socket?.on("notificationRecieved", (notification) => {
       dispatch(nofiticationReceived(notification));
     });
-    return () => {
-      socket.disconnect();
-    };
+    return () => {};
   }, []);
 
   return (

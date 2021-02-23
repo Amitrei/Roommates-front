@@ -13,13 +13,30 @@ const slice = createSlice({
       state.user.socketId = action.payload;
     },
 
+    userJoinedRoom: (state, action) => {
+      state.user.roomId = action.payload;
+    },
+
     nofiticationReceived: (state, action) => {
-      state.notifications.push(action.payload);
+      action.payload instanceof Array
+        ? state.notifications.push(...action.payload)
+        : state.notifications.push(action.payload);
+    },
+
+    notificationDeleted: (state, action) => {
+      const notificIndex = state.notifications.findIndex((notif) => notif._id === action.payload);
+      state.notifications.splice(notificIndex, 1);
     },
   },
 });
 
-export const { userReceived, socketSent, nofiticationReceived } = slice.actions;
+export const {
+  userReceived,
+  socketSent,
+  nofiticationReceived,
+  userJoinedRoom,
+  notificationDeleted,
+} = slice.actions;
 export default slice.reducer;
 
 // Action Creators
@@ -35,6 +52,7 @@ export const getUser = () => (dispatch, getState) => {
 };
 
 export const setSocketId = (socketId) => (dispatch, getState) => {
+  dispatch(socketSent());
   return dispatch(
     apiCallBegan({
       url: `${process.env.REACT_APP_API_MAIN_URL}/api/sockets`,
@@ -49,6 +67,16 @@ export const getNotifications = () => (dispatch, getState) => {
       url: `${process.env.REACT_APP_API_MAIN_URL}/api/notifications`,
       method: "get",
       onSuccess: nofiticationReceived.type,
+    })
+  );
+};
+
+export const deleteNotification = (notificationId) => (dispatch, getState) => {
+  return dispatch(
+    apiCallBegan({
+      url: `${process.env.REACT_APP_API_MAIN_URL}/api/notifications/${notificationId}`,
+      method: "delete",
+      onSuccess: notificationDeleted.type,
     })
   );
 };

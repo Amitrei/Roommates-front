@@ -47,7 +47,6 @@ const Transactions = () => {
       {isCreateTransaction && <CreateTransaction />}
       {isDeleteTransaction && <DeleteTransaction />}
       {isInviteMember && <InviteMember dashboardPopup />}
-      <div>{/* <button onClick={handleCreateTransactionClick}>create transaction</button> */}</div>
 
       <div className="main-transactions-container">
         <div className="dashboard-top-menu">
