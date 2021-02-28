@@ -4,7 +4,12 @@ import { renderBlackOverlay, unRenderBlackOverlay } from "./globalsReducer";
 import { deleteNotification } from "./authReducer";
 const slice = createSlice({
   name: "room",
-  initialState: { room: null, roomTransactions: [], inviteMemberWindow: false },
+  initialState: {
+    room: null,
+    roomTransactions: [],
+    detailedMembers: [],
+    inviteMemberWindow: false,
+  },
   reducers: {
     roomRecieved: (state, action) => {
       state.room = action.payload;
@@ -22,6 +27,9 @@ const slice = createSlice({
       state.room.invitedMembers.push(action.payload);
     },
 
+    membersRecived: (state, action) => {
+      state.detailedMembers = action.payload;
+    },
     transactionCreated: (state, action) => {
       state.room.totalExpenses += action.payload.amount;
       state.room.transactions.push(action.payload._id);
@@ -59,6 +67,7 @@ export const {
   openedMemberInviteWindow,
   closedMemberInviteWindows,
   joinedRoom,
+  membersRecived,
 } = slice.actions;
 export default slice.reducer;
 
@@ -150,6 +159,18 @@ export const joinRoom = (roomId, notificationId) => (dispatch, getState) => {
       method: "post",
       onSuccess: joinedRoom.type,
       toastMessage: "You joined the room",
+    })
+  );
+};
+
+export const getMembers = () => (dispatch, getState) => {
+  return dispatch(
+    apiCallBegan({
+      url: `${process.env.REACT_APP_API_MAIN_URL}/api/rooms/${
+        getState().auth.user.roomId
+      }/members/`,
+      method: "get",
+      onSuccess: membersRecived.type,
     })
   );
 };

@@ -8,7 +8,7 @@ import { getNotifications, deleteNotification } from "./../../store/reducers/aut
 import "../../styles/notifications.scss";
 const Notifications = () => {
   const dispatch = useDispatch();
-  const notifications = useSelector((state) => state.auth.notifications);
+  const notifications = useSelector((state) => state.auth.notifications.allNotifications);
   const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {

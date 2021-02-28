@@ -3,7 +3,7 @@ import { apiCallBegan } from "./../constants/api";
 
 const slice = createSlice({
   name: "Auth",
-  initialState: { user: null, notifications: [] },
+  initialState: { user: null, notifications: { allNotifications: [], seen: false } },
   reducers: {
     userReceived: (state, action) => {
       state.user = action.payload;
@@ -19,13 +19,15 @@ const slice = createSlice({
 
     nofiticationReceived: (state, action) => {
       action.payload instanceof Array
-        ? state.notifications.push(...action.payload)
-        : state.notifications.push(action.payload);
+        ? state.notifications.allNotifications.push(...action.payload)
+        : state.notifications.allNotifications.push(action.payload);
     },
 
     notificationDeleted: (state, action) => {
-      const notificIndex = state.notifications.findIndex((notif) => notif._id === action.payload);
-      state.notifications.splice(notificIndex, 1);
+      const notificIndex = state.notifications.allNotifications.findIndex(
+        (notif) => notif._id === action.payload
+      );
+      state.notifications.allNotifications.splice(notificIndex, 1);
     },
   },
 });

@@ -28,17 +28,24 @@
   font-family: "Nunito Sans", sans-serif;
   font-weight: 600;
   background-color: #ff8a8a;
-  padding: 1rem 3rem;
-  font-size: 2rem;
-  border-radius: 1rem;
+  padding: 2rem 6rem;
+  font-size: 3rem;
+  border-radius: 2rem;
 }
 
 .total-expenses-flex-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .total-expenses-left-side {
   padding: 2rem 4rem;
+}
+
+@media screen and (max-width: 1350px) {
+  .total-expenses-left-side {
+    margin: 2rem 0 4rem 0;
+  }
 }

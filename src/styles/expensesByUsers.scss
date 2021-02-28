@@ -12,6 +12,11 @@
   }
 }
 
+.max-width-chart {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
 @keyframes expensesByUserIn {
   to {
     opacity: 1;

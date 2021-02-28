@@ -15,7 +15,7 @@ const TransactionsLog = ({ isDeleteTransactions }) => {
   const trimLog = (amountOfTransactions) => {
     const length = roomTransactions.length;
 
-    return length >= 5
+    return length >= amountOfTransactions
       ? roomTransactions.slice(length - amountOfTransactions, length)
       : roomTransactions;
   };
@@ -35,6 +35,8 @@ const TransactionsLog = ({ isDeleteTransactions }) => {
           ? "transactions-log-container"
           : "transactions-log-container transactions-empty-log-container"
       }>
+      <h3>Transaction logs</h3>
+
       {!roomTransactions.length && (
         <div className="empty-delete-transactions">
           <img src={"https://img.icons8.com/wired/128/000000/empty-box.png"} />
@@ -43,7 +45,7 @@ const TransactionsLog = ({ isDeleteTransactions }) => {
       )}
 
       {roomTransactions &&
-        trimLog(5).map((transaction) => (
+        trimLog(6).map((transaction) => (
           <div key={transaction._id} className="transaction-row">
             <span>{transaction.date}</span>
             <div className="transaction-row-seperator">
@@ -57,10 +59,11 @@ const TransactionsLog = ({ isDeleteTransactions }) => {
             <div className="transaction-row-seperator">
               <Seperator height="20px" />
             </div>
-            <span>{transaction.madeByEmail}</span>
+            <span className="email-transaction-log">
+              {transaction.madeByEmail.substr(0, transaction.madeByEmail.indexOf("@"))}
+            </span>
           </div>
         ))}
-      <h3>Transaction logs</h3>
     </div>
   ) : (
     <div>

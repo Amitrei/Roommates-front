@@ -10,9 +10,9 @@ const TotalExpenses = () => {
       <h3>Total expenses</h3>
       <div className="total-expenses-flex-container">
         <div className="total-expenses-left-side">
-          <span className="total-expenses-amount">{room && room.totalExpenses}</span>
+          <span className="total-expenses-amount">{room?.totalExpenses}</span>
         </div>
-        <Seperator />
+        {/* <Seperator /> */}
         <div className="total-expenses-right-side">
           <PieChart />
         </div>

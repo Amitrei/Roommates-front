@@ -22,6 +22,7 @@ body {
   font-family: "Roboto", sans-serif;
   background: linear-gradient(0deg, rgba(222, 227, 221, 1) 0%, rgba(250, 254, 250, 1) 100%);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .app {

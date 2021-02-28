@@ -1,10 +1,10 @@
 .dashboard-container {
   position: relative;
-  padding: 2rem;
+  padding: 2rem 4rem;
   min-height: 100vh;
 
   .dashboard-title {
-    margin: 1rem 5rem;
+    margin: 1rem 0;
     font-size: 2.8rem;
     animation: dashboardTitleIn 1s ease-in-out forwards;
   }

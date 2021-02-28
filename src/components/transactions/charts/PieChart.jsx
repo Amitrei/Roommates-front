@@ -26,10 +26,25 @@ const PieChart = () => {
   loadDetails();
   return (
     <Pie
-      options={{ labels: loadDetails().labels }}
+      options={{
+        labels: loadDetails().labels,
+        responsive: [
+          {
+            breakpoint: 780,
+            options: {
+              chart: {
+                width: 300,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      }}
       series={loadDetails().series}
       type="pie"
-      width="380"
+      width="350"
     />
   );
 };

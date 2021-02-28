@@ -17,6 +17,7 @@ import DashboardMenuBtn from "./../DashboardMenuBtn";
 import DeleteTransaction from "./DeleteTransaction";
 import InviteMember from "./../createRoom/InviteMember";
 import { openInviteMemberWindow } from "./../../store/reducers/roomReducer";
+import MembersList from "./../MembersList";
 
 const Transactions = () => {
   const room = useSelector((state) => state.entities.room.room);
@@ -57,18 +58,18 @@ const Transactions = () => {
           <div className="dashboard-menu-btns-container">
             <DashboardMenuBtn
               icon={addMember}
-              content="Add Member"
+              content="Add member"
               onClick={handleInviteMemberClick}
             />
-            <DashboardMenuBtn icon={removeMember} content="Remove Member" />
+            <DashboardMenuBtn icon={removeMember} content="Remove member" />
             <DashboardMenuBtn
               icon={addTransaction}
-              content="Add Transaction"
+              content="Add transaction"
               onClick={handleCreateTransactionClick}
             />
             <DashboardMenuBtn
               icon={deleteTransaction}
-              content="Delete Transaction"
+              content="Delete transaction"
               onClick={handleDeleteTransactionClick}
             />
           </div>
@@ -82,6 +83,9 @@ const Transactions = () => {
         </div>
         <div className="transaction-by-users-grid">
           <BarChart />
+        </div>
+        <div className="members-list-grid">
+          <MembersList />
         </div>
       </div>
     </>
