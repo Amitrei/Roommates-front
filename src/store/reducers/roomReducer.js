@@ -1,14 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./../constants/api";
 import { renderBlackOverlay, unRenderBlackOverlay } from "./globalsReducer";
-import { deleteNotification } from "./authReducer";
+import { deleteNotification, userJoinedRoom, userLeftRoom } from "./authReducer";
 const slice = createSlice({
   name: "room",
   initialState: {
     room: null,
     roomTransactions: [],
+    filteredTransactions: [],
     detailedMembers: [],
     inviteMemberWindow: false,
+    memberListWindow: false,
   },
   reducers: {
     roomRecieved: (state, action) => {
@@ -27,6 +29,28 @@ const slice = createSlice({
       state.room.invitedMembers.push(action.payload);
     },
 
+    leftRoom: (state, action) => {
+      const detailedMembersIdx = state.detailedMembers.findIndex(
+        (member) => member.email === action.payload.email
+      );
+
+      state.detailedMembers.splice(detailedMembersIdx, 1);
+      state.room = null;
+    },
+
+    memberRemoved: (state, action) => {
+      const detailedMembersIdx = state.detailedMembers.findIndex(
+        (member) => member.email === action.payload.email
+      );
+
+      state.detailedMembers.splice(detailedMembersIdx, 1);
+
+      const memberIdx = state.room.members.findIndex(
+        (member) => member.email === action.payload.email
+      );
+      state.room.members.splice(memberIdx, 1);
+    },
+
     membersRecived: (state, action) => {
       state.detailedMembers = action.payload;
     },
@@ -37,7 +61,9 @@ const slice = createSlice({
     },
 
     transactionDeleted: (state, action) => {
-      const index = state.room.transactions.findIndex((t) => t._id === action.payload._id);
+      console.log(action.payload);
+      const index = state.room.transactions.findIndex((t) => t === action.payload._id);
+      console.log(index + "index");
       state.room.totalExpenses -= action.payload.amount;
       state.room.transactions.splice(index, 1);
       state.roomTransactions.splice(index, 1);
@@ -47,12 +73,28 @@ const slice = createSlice({
       state.roomTransactions = action.payload;
     },
 
+    transactionsFiltered: (state, action) => {
+      state.filteredTransactions = action.payload;
+    },
+
+    filteredTransactionsCleared: (state, action) => {
+      state.filteredTransactions = [];
+    },
+
     openedMemberInviteWindow: (state, action) => {
       state.inviteMemberWindow = true;
     },
 
     closedMemberInviteWindows: (state, action) => {
       state.inviteMemberWindow = false;
+    },
+
+    openedMemberList: (state, action) => {
+      state.memberListWindow = true;
+    },
+
+    closedMemberList: (state, action) => {
+      state.memberListWindow = false;
     },
   },
 });
@@ -68,6 +110,12 @@ export const {
   closedMemberInviteWindows,
   joinedRoom,
   membersRecived,
+  memberRemoved,
+  openedMemberList,
+  closedMemberList,
+  leftRoom,
+  transactionsFiltered,
+  filteredTransactionsCleared,
 } = slice.actions;
 export default slice.reducer;
 
@@ -157,7 +205,7 @@ export const joinRoom = (roomId, notificationId) => (dispatch, getState) => {
         getState().auth.user.email
       }`,
       method: "post",
-      onSuccess: joinedRoom.type,
+      onSuccess: userJoinedRoom.type,
       toastMessage: "You joined the room",
     })
   );
@@ -175,6 +223,41 @@ export const getMembers = () => (dispatch, getState) => {
   );
 };
 
+export const removeMember = (memberEmail) => (dispatch, getState) => {
+  return dispatch(
+    apiCallBegan({
+      url: `${process.env.REACT_APP_API_MAIN_URL}/api/rooms/${
+        getState().auth.user.roomId
+      }/members/${memberEmail}`,
+      method: "delete",
+      onSuccess: memberRemoved.type,
+      toastMessage: "Member removed succsessfuly",
+    })
+  );
+};
+
+export const leaveRoom = (memberEmail) => (dispatch, getState) => {
+  dispatch(
+    apiCallBegan({
+      url: `${process.env.REACT_APP_API_MAIN_URL}/api/rooms/${
+        getState().auth.user.roomId
+      }/leave/${memberEmail}`,
+      method: "delete",
+      onSuccess: leftRoom.type,
+      toastMessage: "Member left room succsessfuly",
+    })
+  );
+
+  return dispatch(userLeftRoom());
+};
+
+export const filterTransactions = (filteredTransactions) => (dispatch, getState) => {
+  return dispatch(transactionsFiltered(filteredTransactions));
+};
+
+export const clearFilteredTransactions = () => (dispatch, getState) => {
+  return dispatch(filteredTransactionsCleared());
+};
 export const openInviteMemberWindow = () => (dispatch, getState) => {
   dispatch(renderBlackOverlay());
   return dispatch(openedMemberInviteWindow());
@@ -183,4 +266,14 @@ export const openInviteMemberWindow = () => (dispatch, getState) => {
 export const closeInviteMemberWindow = () => (dispatch, getState) => {
   dispatch(unRenderBlackOverlay());
   return dispatch(closedMemberInviteWindows());
+};
+
+export const openMemberListWindow = () => (dispatch, getState) => {
+  dispatch(renderBlackOverlay());
+  return dispatch(openedMemberList());
+};
+
+export const closeMemberListWindow = () => (dispatch, getState) => {
+  dispatch(unRenderBlackOverlay());
+  return dispatch(closedMemberList());
 };

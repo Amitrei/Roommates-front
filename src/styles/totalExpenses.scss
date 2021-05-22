@@ -5,7 +5,6 @@
   padding: 2rem;
   width: 100%;
   height: 100%;
-  animation: totalExpensesIn 1s ease-in-out forwards;
   h3 {
     font-size: 1.6rem;
   }
@@ -28,9 +27,15 @@
   font-family: "Nunito Sans", sans-serif;
   font-weight: 600;
   background-color: #ff8a8a;
-  padding: 2rem 6rem;
+  padding: 2rem 4rem;
   font-size: 3rem;
   border-radius: 2rem;
+  width: 100%;
+  max-width: 300px;
+
+  @media screen and (max-width: 750px) {
+    padding: 2rem 2rem;
+  }
 }
 
 .total-expenses-flex-container {
@@ -42,6 +47,18 @@
 
 .total-expenses-left-side {
   padding: 2rem 4rem;
+}
+
+.total-expenses-right-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-data {
+  font-size: 2rem;
+  color: grey;
+  text-align: center;
 }
 
 @media screen and (max-width: 1350px) {

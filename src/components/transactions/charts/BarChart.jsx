@@ -4,17 +4,29 @@ import "../../../styles/expensesByUsers.scss";
 
 const BarChart = () => {
   const roomTransactions = useSelector((state) => state.entities.room.roomTransactions);
+  const filteredTransactions = useSelector((state) => state.entities.room.filteredTransactions);
 
   const loadDetails = () => {
     let userVsAmount = {};
     let finalDetails = { series: [], categories: [] };
-    roomTransactions.forEach((transaction) => {
-      if (!userVsAmount[transaction.madeByEmail]) {
-        userVsAmount[transaction.madeByEmail] = 0;
-      }
 
-      userVsAmount[transaction.madeByEmail] += transaction.amount;
-    });
+    if (filteredTransactions.length) {
+      filteredTransactions.forEach((transaction) => {
+        if (!userVsAmount[transaction.madeByEmail]) {
+          userVsAmount[transaction.madeByEmail] = 0;
+        }
+
+        userVsAmount[transaction.madeByEmail] += transaction.amount;
+      });
+    } else {
+      roomTransactions.forEach((transaction) => {
+        if (!userVsAmount[transaction.madeByEmail]) {
+          userVsAmount[transaction.madeByEmail] = 0;
+        }
+
+        userVsAmount[transaction.madeByEmail] += transaction.amount;
+      });
+    }
 
     for (let prop in userVsAmount) {
       finalDetails.series.push(userVsAmount[prop]);
@@ -25,7 +37,6 @@ const BarChart = () => {
   };
 
   loadDetails();
-  console.log(loadDetails());
 
   const options = {
     chart: {
@@ -33,11 +44,15 @@ const BarChart = () => {
       height: 380,
       type: "bar",
     },
+    fill: {
+      colors: ["#71C7FF", "#26E7A6", "#FEBC3B", "#FF6178"],
+    },
     plotOptions: {
       bar: {
         horizontal: false,
         columnWidth: "40%",
         barHeight: "40%",
+        distributed: true,
       },
     },
     dataLabels: {
@@ -61,7 +76,7 @@ const BarChart = () => {
     },
     responsive: [
       {
-        breakpoint: 1000,
+        breakpoint: 1250,
         options: {
           plotOptions: {
             bar: {

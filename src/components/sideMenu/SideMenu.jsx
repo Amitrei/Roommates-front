@@ -17,12 +17,24 @@ const SideMenu = () => {
         <img src={user.profilePicture} />
         <div className="user-details-right-side">
           <h3>{user.email}</h3>
-          <h4>16/02/2021</h4>
         </div>
       </div>
-      <MenuBtn link="Dashboard" Icon={<HomeIcon fontSize="large" className="btn-icon" />} />
-      <MenuBtn link="My Account" Icon={<AccountBoxIcon fontSize="large" className="btn-icon" />} />
-      <MenuBtn link="Logout" Icon={<ExitToAppIcon fontSize="large" className="btn-icon" />} />
+      <MenuBtn
+        link="Dashboard"
+        linkHref="/dashboard"
+        Icon={<HomeIcon fontSize="large" className="btn-icon" />}
+      />
+      <MenuBtn
+        link="My Account"
+        linkHref="/my-account"
+        Icon={<AccountBoxIcon fontSize="large" className="btn-icon" />}
+      />
+      <MenuBtn
+        logoutBtn
+        link="Logout"
+        linkHref="/logout"
+        Icon={<ExitToAppIcon fontSize="large" className="btn-icon" />}
+      />
     </div>
   );
 };

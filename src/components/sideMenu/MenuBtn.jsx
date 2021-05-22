@@ -1,11 +1,16 @@
 import "../../styles/menuBtn.scss";
-const MenuBtn = ({ link = "Menu btn", Icon }) => {
+import { NavLink } from "react-router-dom";
+const MenuBtn = ({ link = "Menu btn", Icon, linkHref }) => {
   return (
-    <div className="menu-btn">
-      <div className="btn-icon-title">
-        {Icon}
-        <a>{link}</a>
-      </div>
+    <div className="side-menu-btn-container">
+      <NavLink to={linkHref}>
+        <div className="side-menu-btn">
+          <div className="btn-icon-title">
+            {Icon}
+            <span className="menu-btn-link">{link}</span>
+          </div>
+        </div>
+      </NavLink>
     </div>
   );
 };

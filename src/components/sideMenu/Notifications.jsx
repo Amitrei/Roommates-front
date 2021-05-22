@@ -6,7 +6,12 @@ import { useEffect, useState } from "react";
 import { joinRoom } from "../../store/reducers/roomReducer";
 import { getNotifications, deleteNotification } from "./../../store/reducers/authReducer";
 import "../../styles/notifications.scss";
+import transition from "../../utils/transitionFramer";
+import { motion } from "framer-motion";
+import { Redirect, useHistory } from "react-router-dom";
+
 const Notifications = () => {
+  let history = useHistory();
   const dispatch = useDispatch();
   const notifications = useSelector((state) => state.auth.notifications.allNotifications);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -30,9 +35,16 @@ const Notifications = () => {
   const handleNotificationsClicked = () => {
     setShowNotifications(!showNotifications);
   };
+
+  const handleAcceptClicked = (roomId, userId) => {
+    setShowNotifications(false);
+    dispatch(joinRoom(roomId, userId));
+    history.push("/dashboard");
+  };
+
   return (
     <>
-      <div
+      <motion.div
         className={
           UnseenNotifications()
             ? "notification-container active-notification"
@@ -46,11 +58,11 @@ const Notifications = () => {
         ) : (
           <NotificationsNoneOutlinedIcon className="notification-icon" />
         )}
-      </div>
+      </motion.div>
       <div
         className={showNotifications ? "notifications-menu notifications-menu-in" : "display-none"}>
         <h3 className={showNotifications ? "notifications-menu-title-in" : "display-none"}>
-          Notifications{" "}
+          Notifications
           <span style={{ fontSize: "1.2rem", color: "grey", opacity: "0.7", marginLeft: "0.5rem" }}>
             {notifications.length}
           </span>
@@ -68,7 +80,7 @@ const Notifications = () => {
                 <Button
                   color="primary"
                   variant="contained"
-                  onClick={() => dispatch(joinRoom(notif.roomId, notif._id))}>
+                  onClick={() => handleAcceptClicked(notif.roomId, notif._id)}>
                   Accept
                 </Button>
 

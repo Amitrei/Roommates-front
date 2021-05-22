@@ -3,13 +3,18 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import Badge from "../Badge";
 import Seperator from "./../Seperator";
 import Form from "./../inputs/Form";
-import { createRoom, inviteMember } from "./../../store/reducers/roomReducer";
+import { createRoom } from "./../../store/reducers/roomReducer";
+import { userJoinedRoom } from "./../../store/reducers/authReducer";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { validateRoomName } from "./../inputs/validators/createRoomValidator";
 import InviteMember from "./InviteMember";
+import { useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
+import transition from "../../utils/transitionFramer";
 
 const CreateRoom = () => {
+  const history = useHistory();
   const [roomName, setRoomName] = useState("");
   const [error, setError] = useState({ createRoomForm: null });
   const dispatch = useDispatch();
@@ -40,8 +45,21 @@ const CreateRoom = () => {
     ],
   };
 
+  const handleGoDashboardClicked = () => {
+    dispatch(userJoinedRoom(getRoom));
+    history.push("/dashboard");
+  };
+
   return (
-    <div className="create-room-container">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+        transition: { duration: 0.3, ease: [0.43, 0.6, 0.8, 0.96] },
+      }}
+      exit={{ opacity: 0 }}
+      className="create-room-container">
       <div
         className={
           getRoom && getRoom.name ? "create-room-left-side side-disabled" : "create-room-left-side "
@@ -70,6 +88,7 @@ const CreateRoom = () => {
       </div>
 
       <div
+        onClick={() => handleGoDashboardClicked()}
         className={
           getRoom && getRoom.name
             ? "go-to-dashboard-container"
@@ -77,7 +96,7 @@ const CreateRoom = () => {
         }>
         <NavigateNextIcon className="next-icon" />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,7 +1,7 @@
 import "../styles/landingPage.scss";
 import googleIcon from "../assets/google-icon.svg";
 import landingImage from "../assets/landing-image.svg";
-
+import { motion } from "framer-motion";
 const LandingPage = () => {
   return (
     <div className="ladingPage-body">

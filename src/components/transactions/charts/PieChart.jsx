@@ -1,19 +1,33 @@
-import { useState } from "react";
 import Pie from "react-apexcharts";
 import { useSelector } from "react-redux";
 const PieChart = () => {
   const roomTransactions = useSelector((state) => state.entities.room.roomTransactions);
+  const filteredTransactions = useSelector((state) => state.entities.room.filteredTransactions);
 
   const loadDetails = () => {
     let categoryVsAmount = {};
     let finalDetails = { series: [], labels: [] };
-    roomTransactions.forEach((transaction) => {
-      if (!categoryVsAmount[transaction.category]) {
-        categoryVsAmount[transaction.category] = 0;
-      }
 
-      categoryVsAmount[transaction.category] += transaction.amount;
-    });
+    if(filteredTransactions.length) {
+      filteredTransactions.forEach((transaction) => {
+        if (!categoryVsAmount[transaction.category]) {
+          categoryVsAmount[transaction.category] = 0;
+        }
+  
+        categoryVsAmount[transaction.category] += transaction.amount;
+      }); 
+    }
+
+    else{
+      roomTransactions.forEach((transaction) => {
+        if (!categoryVsAmount[transaction.category]) {
+          categoryVsAmount[transaction.category] = 0;
+        }
+  
+        categoryVsAmount[transaction.category] += transaction.amount;
+      });
+    }
+   
 
     for (let prop in categoryVsAmount) {
       finalDetails.series.push(categoryVsAmount[prop]);

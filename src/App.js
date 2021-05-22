@@ -19,9 +19,7 @@ function App() {
     // Store the client socket Id on the server side to implement specific notifications
     socket = io("http://localhost:3002", {});
     socket.on("connect", () => {
-      console.log("connected");
-      console.log("send socket id", socket.id);
-      dispatch(setSocketId(socket.id));
+      dispatch(setSocketId(socket?.id));
     });
 
     socket?.on("notificationRecieved", (notification) => {
@@ -36,7 +34,7 @@ function App() {
         className={
           isBlackOverlay ? "black-overlay black-overlay-in" : "black-overlay black-overlay-out"
         }></div>
-      {user && user.email ? <MainApp user={user} /> : <LandingPage />}
+      {user && user.email ? <MainApp /> : <LandingPage />}
       <ToastContainer />
     </div>
   );

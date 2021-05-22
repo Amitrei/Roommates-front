@@ -9,12 +9,15 @@ const slice = createSlice({
       state.user = action.payload;
     },
 
+    userLeftRoom: (state, action) => {
+      state.user.roomId = null;
+    },
     socketSent: (state, action) => {
       state.user.socketId = action.payload;
     },
 
     userJoinedRoom: (state, action) => {
-      state.user.roomId = action.payload;
+      state.user.roomId = action.payload._id;
     },
 
     nofiticationReceived: (state, action) => {
@@ -37,6 +40,7 @@ export const {
   socketSent,
   nofiticationReceived,
   userJoinedRoom,
+  userLeftRoom,
   notificationDeleted,
 } = slice.actions;
 export default slice.reducer;

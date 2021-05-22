@@ -1,4 +1,5 @@
 import "../styles/dashboardMenuBtn.scss";
+
 const DashboardMenuBtn = ({ icon, onClick = null, content = "" }) => {
   return (
     <div className="dashboard-menu-btn" onClick={onClick}>
